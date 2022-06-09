@@ -3,10 +3,13 @@ package com.example.hearingapp
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
+import android.media.VolumeShaper
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.hearingapp.databinding.ActivityMainBinding
 import kotlin.experimental.and
 import kotlin.math.floor
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     val handler: Handler = Handler()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         var minfreq:Double = end
         val frequencies = arrayListOf(125.0,250.0,500.0,1000.0,2000.0,4000.0,8000.0)
-        var i : Int = frequencies.size-1
+        var i : Int = frequencies.size-5
             val thread: Thread = Thread(Runnable() {
             run() {
                 while (i>=0) {
@@ -119,8 +123,10 @@ class MainActivity : AppCompatActivity() {
                 ((value.toByte() and 0xff00.toByte()) / Math.pow(2.0, 8.0)).toInt().toByte()
 
         }
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun playSound()
     {
         val audioTrack = AudioTrack (
@@ -129,7 +135,17 @@ class MainActivity : AppCompatActivity() {
             AudioFormat.ENCODING_PCM_16BIT, numSamples,
             AudioTrack.MODE_STATIC)
         audioTrack.write(generatedSnd, 0, generatedSnd.size)
+        val config: VolumeShaper.Configuration = VolumeShaper.Configuration.Builder(VolumeShaper.Configuration.SINE_RAMP)
+            .setDuration(3000)
+            .setCurve(floatArrayOf(0f, 1f), floatArrayOf(0.8f, 1f))
+            .setInterpolatorType(VolumeShaper.Configuration.INTERPOLATOR_TYPE_LINEAR)
+            .build()
+        val volumeShaper=audioTrack.createVolumeShaper(config)
+        volumeShaper.apply(VolumeShaper.Operation.PLAY)
+        Log.i("freq", volumeShaper.volume.toString())
+//        audioTrack.write(generatedSnd, 0, generatedSnd.size)
         audioTrack.play()
+
         //flag=true
     }
 }
