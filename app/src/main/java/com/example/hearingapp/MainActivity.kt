@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     var start: Double = 125.0
     var end: Double = 8000.0
     var flag: Boolean = true
-    var freqOfTone: Double = 125.0 // hz
+    //var freqOfTone: Double = 125.0 // hz
 
     val generatedSnd = ByteArray(2 * numSamples)
 
@@ -34,34 +34,37 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var minfreq:Double = end
-
+        val frequencies = arrayListOf(125.0,250.0,500.0,1000.0,2000.0,4000.0,8000.0)
+        var i : Int = frequencies.size-5
             val thread: Thread = Thread(Runnable() {
             run() {
-                while (start <= end) {
+                while (i>=0&&i<frequencies.size) {
                     if (flag) {
                         binding.btnYes.isClickable = false
                         binding.btnNo.isClickable = false
-                        var mid: Double = floor((start + end) / 2)
+                        //var mid: Double = floor((start + end) / 2)
                         flag=false
 
                         handler.post(Runnable() {
                             binding.tvFreq.text =
-                                "Playing sound of freq " + mid.toString()
+                                "Playing sound of freq " + frequencies[i].toString()
                             run() {
-                                genTone(mid)
-                                Log.i("freq",mid.toString())
+                                genTone(frequencies[i])
+                                Log.i("freq",frequencies[i].toString())
                                 playSound()
                             }
                             Handler().postDelayed({
                                 binding.btnYes.isClickable = true
                                 binding.btnNo.isClickable = true
                                 binding.btnYes.setOnClickListener {
-                                    minfreq = mid
-                                    end = mid - 10
+//                                    minfreq = mid
+//                                    end = mid - 10
+                                    i=i-1
                                     flag=true
                                 }
                                 binding.btnNo.setOnClickListener {
-                                    start = mid + 10
+//                                    start = mid + 10
+                                    i=i+1
                                     flag=true
                                 }
                             }, 3000)
@@ -69,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
                         })
                     }
+
                 }
             }
         })
