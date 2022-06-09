@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         var minfreq:Double = end
         val frequencies = arrayListOf(125.0,250.0,500.0,1000.0,2000.0,4000.0,8000.0)
-        var i : Int = frequencies.size-5
+        var i : Int = frequencies.size-1
             val thread: Thread = Thread(Runnable() {
             run() {
-                while (i>=0&&i<frequencies.size) {
+                while (i>=0) {
                     if (flag) {
                         binding.btnYes.isClickable = false
                         binding.btnNo.isClickable = false
@@ -59,12 +59,13 @@ class MainActivity : AppCompatActivity() {
                                 binding.btnYes.setOnClickListener {
 //                                    minfreq = mid
 //                                    end = mid - 10
-                                    i=i-1
+//                                    i=i-1
                                     flag=true
                                 }
                                 binding.btnNo.setOnClickListener {
 //                                    start = mid + 10
-                                    i=i+1
+//                                    Log.i("min freq",frequencies[i].toString())
+//                                    i=-1
                                     flag=true
                                 }
                             }, 3000)
