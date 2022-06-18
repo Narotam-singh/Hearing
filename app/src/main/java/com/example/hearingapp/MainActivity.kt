@@ -1,5 +1,6 @@
 package com.example.hearingapp
 
+import android.media.AudioDeviceInfo
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
@@ -132,18 +133,30 @@ class MainActivity : AppCompatActivity() {
         val audioTrack = AudioTrack (
             AudioManager.STREAM_MUSIC,
             sampleRate, AudioFormat.CHANNEL_OUT_MONO,
-            AudioFormat.ENCODING_PCM_16BIT, numSamples,
-            AudioTrack.MODE_STATIC)
+                AudioFormat.ENCODING_PCM_16BIT, numSamples,
+                AudioTrack.MODE_STATIC)
         audioTrack.write(generatedSnd, 0, generatedSnd.size)
         val config: VolumeShaper.Configuration = VolumeShaper.Configuration.Builder(VolumeShaper.Configuration.SINE_RAMP)
-            .setDuration(3000)
-            .setCurve(floatArrayOf(0f, 1f), floatArrayOf(0.8f, 1f))
+            .setDuration(10000)
+            .setCurve(floatArrayOf(0f, 1f), floatArrayOf(1f, 1f))
             .setInterpolatorType(VolumeShaper.Configuration.INTERPOLATOR_TYPE_LINEAR)
             .build()
         val volumeShaper=audioTrack.createVolumeShaper(config)
         volumeShaper.apply(VolumeShaper.Operation.PLAY)
         Log.i("freq", volumeShaper.volume.toString())
 //        audioTrack.write(generatedSnd, 0, generatedSnd.size)
+        val audioManager:AudioManager= getSystemService(AUDIO_SERVICE) as AudioManager
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (0.90*maxVolume).toInt(),0)
+        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        audioManager.stopBluetoothSco()
+        audioManager.setBluetoothScoOn(false)
+        audioManager.setSpeakerphoneOn(false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val sound=audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC,audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),AudioDeviceInfo.TYPE_WIRED_HEADPHONES)
+            Log.i("db", sound.toString() + " " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toString() + " " + maxVolume.toString())
+
+        }
         audioTrack.play()
 
         //flag=true
