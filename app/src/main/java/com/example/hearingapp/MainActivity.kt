@@ -6,16 +6,14 @@ import android.media.AudioManager
 import android.media.AudioTrack
 import android.media.VolumeShaper
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hearingapp.databinding.ActivityMainBinding
-import kotlin.experimental.and
-import kotlin.math.floor
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     var flag: Boolean = true
     //var freqOfTone: Double = 125.0 // hz
 
-    val generatedSnd = ByteArray(2 * numSamples)
+    val generatedSnd = ShortArray( numSamples)
 
     val handler: Handler = Handler()
 
@@ -110,20 +108,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun genTone(freq:Double) {
         // fill out the array
+//        var K =2.0 * Math.PI / (sampleRate)
+//        var f : Double=freq
+//        var q : Double=0.0
         for (i in 0 until numSamples) {
-            sample[i] = Math.sin(2 * Math.PI * i / (sampleRate / freq))
+            sample[i] = Math.sin(2 * Math.PI * i / (sampleRate / freq)) // Sine wave
+            generatedSnd[i] = (sample[i] * (Short.MAX_VALUE - 25000)).toInt().toShort()  // Higher amplitude increases volume
+//            sample[i] = Math.sin(2 * Math.PI * i / (sampleRate / freq))
         }
 
-        var idx: Int = 0
-        for (i in sample) {
-            // scale to maximum amplitude
-            val value = ((i * 32767)).toInt().toShort()
-            // in 16 bit wav PCM, first byte is the low order byte
-            generatedSnd[idx++] = (value.toByte() and 0x00ff.toByte())
-            generatedSnd[idx++] =
-                ((value.toByte() and 0xff00.toByte()) / Math.pow(2.0, 8.0)).toInt().toByte()
 
-        }
+
+//        var idx: Int = 0
+//        for (i in sample) {
+//            // scale to maximum amplitude
+//            val value = ((i * Short.MAX_VALUE)).toInt().toShort()
+////            Log.i("freq", Short.MAX_VALUE.toString())
+//            // in 16 bit wav PCM, first byte is the low order byte
+////            generatedSnd[idx++] = (value.toByte() and 0x00ff.toByte())
+////            generatedSnd[idx++] =
+////                ((value.toByte() and 0xff00.toByte()) / Math.pow(2.0, 8.0)).toInt().toByte()
+//
+//
+//        }
 
     }
 
@@ -147,13 +154,13 @@ class MainActivity : AppCompatActivity() {
 //        audioTrack.write(generatedSnd, 0, generatedSnd.size)
         val audioManager:AudioManager= getSystemService(AUDIO_SERVICE) as AudioManager
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (0.90*maxVolume).toInt(),0)
-        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        audioManager.stopBluetoothSco()
-        audioManager.setBluetoothScoOn(false)
-        audioManager.setSpeakerphoneOn(false)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (0.8*maxVolume).toInt(),0)
+//        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION)
+//        audioManager.stopBluetoothSco()
+//        audioManager.setBluetoothScoOn(false)
+//        audioManager.setSpeakerphoneOn(false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val sound=audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC,audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),AudioDeviceInfo.TYPE_WIRED_HEADPHONES)
+            val sound=audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC,audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),AudioDeviceInfo.TYPE_BUILTIN_SPEAKER)
             Log.i("db", sound.toString() + " " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toString() + " " + maxVolume.toString())
 
         }
