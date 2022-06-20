@@ -12,7 +12,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hearingapp.databinding.ActivityMainBinding
-
+import kotlin.text.Typography.amp
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
             run() {
                 while (i>=0) {
                     if (flag) {
-                        binding.btnYes.isClickable = false
-                        binding.btnNo.isClickable = false
+                        binding.fabYes.isClickable = false
+                        binding.fabNo.isClickable = false
                         //var mid: Double = floor((start + end) / 2)
                         flag=false
 
@@ -57,18 +57,13 @@ class MainActivity : AppCompatActivity() {
                                 playSound()
                             }
                             Handler().postDelayed({
-                                binding.btnYes.isClickable = true
-                                binding.btnNo.isClickable = true
-                                binding.btnYes.setOnClickListener {
-//                                    minfreq = mid
-//                                    end = mid - 10
-//                                    i=i-1
+                                binding.fabYes.isClickable = true
+                                binding.fabNo.isClickable = true
+                                binding.tvFreq.text="Did you hear that?\n  Press Yes or No"
+                                binding.fabYes.setOnClickListener {
                                     flag=true
                                 }
-                                binding.btnNo.setOnClickListener {
-//                                    start = mid + 10
-//                                    Log.i("min freq",frequencies[i].toString())
-//                                    i=-1
+                                binding.fabNo.setOnClickListener {
                                     flag=true
                                 }
                             }, 3000)
@@ -81,9 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
         thread.start()
-
-                //flag=false
-            //}
         }
 
 
@@ -107,14 +99,12 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     private fun genTone(freq:Double) {
-        // fill out the array
-//        var K =2.0 * Math.PI / (sampleRate)
-//        var f : Double=freq
-//        var q : Double=0.0
+
         for (i in 0 until numSamples) {
             sample[i] = Math.sin(2 * Math.PI * i / (sampleRate / freq)) // Sine wave
-            generatedSnd[i] = (sample[i] * (Short.MAX_VALUE - 25000)).toInt().toShort()  // Higher amplitude increases volume
-//            sample[i] = Math.sin(2 * Math.PI * i / (sampleRate / freq))
+            val amp=Short.MIN_VALUE+32768+Math.pow(10.0, 10/20.0).toInt().toShort()
+            generatedSnd[i] = (sample[i] * amp).toInt().toShort()  // Higher amplitude increases volume
+            Log.i("amp",amp.toString())
         }
 
 
@@ -144,26 +134,26 @@ class MainActivity : AppCompatActivity() {
                 AudioTrack.MODE_STATIC)
         audioTrack.write(generatedSnd, 0, generatedSnd.size)
         val config: VolumeShaper.Configuration = VolumeShaper.Configuration.Builder(VolumeShaper.Configuration.SINE_RAMP)
-            .setDuration(10000)
+            .setDuration(6000)
             .setCurve(floatArrayOf(0f, 1f), floatArrayOf(1f, 1f))
             .setInterpolatorType(VolumeShaper.Configuration.INTERPOLATOR_TYPE_LINEAR)
             .build()
         val volumeShaper=audioTrack.createVolumeShaper(config)
         volumeShaper.apply(VolumeShaper.Operation.PLAY)
-        Log.i("freq", volumeShaper.volume.toString())
-//        audioTrack.write(generatedSnd, 0, generatedSnd.size)
-        val audioManager:AudioManager= getSystemService(AUDIO_SERVICE) as AudioManager
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (0.8*maxVolume).toInt(),0)
-//        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION)
-//        audioManager.stopBluetoothSco()
-//        audioManager.setBluetoothScoOn(false)
-//        audioManager.setSpeakerphoneOn(false)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val sound=audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC,audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),AudioDeviceInfo.TYPE_BUILTIN_SPEAKER)
-            Log.i("db", sound.toString() + " " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toString() + " " + maxVolume.toString())
-
-        }
+//        Log.i("freq", volumeShaper.volume.toString())
+////        audioTrack.write(generatedSnd, 0, generatedSnd.size)
+//        val audioManager:AudioManager= getSystemService(AUDIO_SERVICE) as AudioManager
+//        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+//        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (maxVolume),0)
+////        audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION)
+////        audioManager.stopBluetoothSco()
+////        audioManager.setBluetoothScoOn(false)
+////        audioManager.setSpeakerphoneOn(false)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            val sound=audioManager.getStreamVolumeDb(AudioManager.STREAM_MUSIC,audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),AudioDeviceInfo.TYPE_BUILTIN_SPEAKER)
+//            Log.i("db", sound.toString() + " " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toString() + " " + maxVolume.toString())
+//
+//        }
         audioTrack.play()
 
         //flag=true
