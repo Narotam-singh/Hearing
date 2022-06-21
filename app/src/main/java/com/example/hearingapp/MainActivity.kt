@@ -43,19 +43,19 @@ class MainActivity : AppCompatActivity() {
         var minfreq: Double = end
         val frequencies = arrayListOf(125.0, 250.0, 500.0, 1000.0, 2000.0, 4000.0, 8000.0)
         val dbs = arrayListOf(10, 20, 40, 60, 80, 100)
-        var freqi: Int = 5
+        var freqi: Int = 0
         var dbi: Int = 0
         val thread: Thread = Thread(Runnable() {
             run() {
                 var mindb: Int = -20
                 while (dbi < dbs.size && dbi >= 0 && freqi < frequencies.size && freqi >= 0) {
-                    if(freqi==frequencies.size-1)
-                    {
-                        Log.i("Freqi",freqi.toString())
-                        val intent: Intent=Intent(this,ResultDispaly::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
+//                    if(freqi==frequencies.size-1)
+//                    {
+//                        Log.i("Freqi",freqi.toString())
+//                        val intent: Intent=Intent(this,ResultDispaly::class.java)
+//                        startActivity(intent)
+//                        finish()
+//                    }
                     if (flag)
                     {
                         binding.fabYes.isClickable = false
@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                             dbi = 0
                             mindb = -20
                         }
+                        if(freqi<frequencies.size){
                         handler.post(Runnable() {
                             binding.tvFreq.text =
                                 "Playing sound of freq = " + frequencies[freqi].toString() + "\n  dB = " + dbs[dbi].toString()
@@ -90,6 +91,10 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }, 3000)
                         })
+                        }else{
+                            startActivity(Intent(this,ResultDispaly::class.java))
+                            finish()
+                        }
                     }
                 }
             }
