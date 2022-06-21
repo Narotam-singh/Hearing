@@ -14,7 +14,7 @@
         android:theme="@style/Theme.HearingApp"
         tools:targetApi="31">
         <activity
-            android:name=".ResultDispaly"
+            android:name=".ResultDisplay"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

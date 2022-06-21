@@ -1,9 +1,8 @@
 package com.example.hearingapp
 
 import android.annotation.SuppressLint
-import android.content.Context.AUDIO_SERVICE
 import android.content.Intent
-import android.media.AudioDeviceInfo
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
@@ -11,13 +10,13 @@ import android.media.VolumeShaper
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Parcelable
+import android.util.ArrayMap
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.hearingapp.databinding.ActivityMainBinding
-import kotlin.text.Typography.amp
+import kotlin.math.min
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     var end: Double = 8000.0
     var flag: Boolean = true
     val generatedSnd = ShortArray(numSamples)
-
+    val points: HashMap<String,String> = HashMap()
     val handler: Handler = Handler()
 
     @SuppressLint("SetTextI18n")
@@ -62,6 +61,8 @@ class MainActivity : AppCompatActivity() {
                         binding.fabNo.isClickable = false
                         flag = false
                         if (mindb != -20) {
+                            points[frequencies[freqi].toInt().toString()]=mindb.toString()
+//                            points.add(Points(frequencies[freqi].toInt(), mindb))
                             freqi++
                             dbi = 0
                             mindb = -20
@@ -92,7 +93,9 @@ class MainActivity : AppCompatActivity() {
                             }, 3000)
                         })
                         }else{
-                            startActivity(Intent(this,ResultDispaly::class.java))
+                            val intent=Intent(this,ResultDisplay::class.java)
+                            intent.putExtra("points",points)
+                            startActivity(intent)
                             finish()
                         }
                     }
