@@ -15,10 +15,11 @@ import android.util.ArrayMap
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.example.hearingapp.databinding.ActivityMainBinding
 import kotlin.math.min
 
-
+//TODO modify the code to check if the user didn't heard any dB
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val duration: Int = 6 // seconds
@@ -29,8 +30,10 @@ class MainActivity : AppCompatActivity() {
     var end: Double = 8000.0
     var flag: Boolean = true
     val generatedSnd = ShortArray(numSamples)
-    val points: HashMap<String,String> = HashMap()
+//    val points: HashMap<String,String> = HashMap()
     val handler: Handler = Handler()
+//    val points1 = Array(7,{ArrayList<Double>(2)})
+    val points : ArrayList<ArrayList<Double>> = ArrayList<ArrayList<Double>>()
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,8 +64,11 @@ class MainActivity : AppCompatActivity() {
                         binding.fabNo.isClickable = false
                         flag = false
                         if (mindb != -20) {
-                            points[frequencies[freqi].toInt().toString()]=mindb.toString()
+//                            points[frequencies[freqi].toInt().toString()]=mindb.toString()
 //                            points.add(Points(frequencies[freqi].toInt(), mindb))
+//                            val temp:ArrayList<Double>
+//                            temp.add()
+                            points.add(arrayListOf(frequencies[freqi],mindb.toDouble()))
                             freqi++
                             dbi = 0
                             mindb = -20
@@ -87,7 +93,14 @@ class MainActivity : AppCompatActivity() {
                                     flag = true
                                 }
                                 binding.fabNo.setOnClickListener {
-                                    dbi++
+                                    ++dbi
+                                    if(dbi>=dbs.size){
+                                        //freqi++
+                                        dbi=0
+                                        mindb=dbs[dbs.size-1]
+                                        //points.add(arrayListOf(frequencies[freqi],mindb.toDouble()))
+                                        //mindb=-20
+                                    }
                                     flag = true
                                 }
                             }, 3000)
