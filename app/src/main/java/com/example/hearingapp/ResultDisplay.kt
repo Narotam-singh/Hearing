@@ -62,7 +62,6 @@ class ResultDisplay : AppCompatActivity() {
             return (frequencies.getOrNull(value.toInt()) ?: (value.toString() + "Hz").toString()).toString()
         }
     }
-
 }
 
 

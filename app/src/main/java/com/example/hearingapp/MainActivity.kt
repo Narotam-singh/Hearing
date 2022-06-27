@@ -31,9 +31,7 @@ class MainActivity : AppCompatActivity() {
     var end: Double = 8000.0
     var flag: Boolean = true
     val generatedSnd = ShortArray(numSamples)
-//    val points: HashMap<String,String> = HashMap()
     val handler: Handler = Handler()
-//    val points1 = Array(7,{ArrayList<Double>(2)})
     val points : ArrayList<ArrayList<Double>> = ArrayList<ArrayList<Double>>()
 
     @SuppressLint("SetTextI18n")
@@ -52,23 +50,12 @@ class MainActivity : AppCompatActivity() {
             run() {
                 var mindb: Int = -20
                 while (dbi < dbs.size && dbi >= 0 && freqi < frequencies.size && freqi >= 0) {
-//                    if(freqi==frequencies.size-1)
-//                    {
-//                        Log.i("Freqi",freqi.toString())
-//                        val intent: Intent=Intent(this,ResultDispaly::class.java)
-//                        startActivity(intent)
-//                        finish()
-//                    }
                     if (flag)
                     {
                         binding.fabYes.isClickable = false
                         binding.fabNo.isClickable = false
                         flag = false
                         if (mindb != -20) {
-//                            points[frequencies[freqi].toInt().toString()]=mindb.toString()
-//                            points.add(Points(frequencies[freqi].toInt(), mindb))
-//                            val temp:ArrayList<Double>
-//                            temp.add()
                             points.add(arrayListOf(frequencies[freqi],mindb.toDouble()))
                             freqi++
                             dbi = 0
@@ -96,11 +83,8 @@ class MainActivity : AppCompatActivity() {
                                 binding.fabNo.setOnClickListener {
                                     ++dbi
                                     if(dbi>=dbs.size){
-                                        //freqi++
                                         dbi=0
                                         mindb=dbs[dbs.size-1]
-                                        //points.add(arrayListOf(frequencies[freqi],mindb.toDouble()))
-                                        //mindb=-20
                                     }
                                     flag = true
                                 }
@@ -142,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                 .setCurve(floatArrayOf(0f, 1f), floatArrayOf(1f, 1f))
                 .setInterpolatorType(VolumeShaper.Configuration.INTERPOLATOR_TYPE_LINEAR)
                 .build()
+        audioTrack.setStereoVolume(0f,1f)  //Right EarPhone Only
         val volumeShaper = audioTrack.createVolumeShaper(config)
         volumeShaper.apply(VolumeShaper.Operation.PLAY)
         val audioManager: AudioManager = getSystemService(AUDIO_SERVICE) as AudioManager
