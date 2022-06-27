@@ -16,13 +16,13 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import com.example.hearingapp.databinding.ActivityMainBinding
+import com.example.hearingapp.databinding.ActivityMainRightBinding
 import kotlin.math.min
 
 //TODO modify the code to check if the user didn't heard any dB
 //TODO left and right ear
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MainActivityRight : AppCompatActivity() {
+    private lateinit var binding: ActivityMainRightBinding
     val duration: Int = 6 // seconds
     val sampleRate: Int = 12000
     val numSamples: Int = duration * sampleRate
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainRightBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         var minfreq: Double = end
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                             }, 3000)
                         })
                         }else{
-                            val intent=Intent(this,ResultDisplay::class.java)
+                            val intent=Intent(this,MainActivityLeft::class.java)
                             intent.putExtra("points",points)
                             startActivity(intent)
                             finish()
