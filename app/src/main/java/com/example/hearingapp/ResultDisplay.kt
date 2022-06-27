@@ -27,8 +27,8 @@ class ResultDisplay : AppCompatActivity() {
         binding=ActivityResultDisplayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val pointsRight :ArrayList<ArrayList<Double>> = ArrayList<ArrayList<Double>>()
-        val pointsLeft :ArrayList<ArrayList<Double>> = ArrayList<ArrayList<Double>>()
+//        val pointsRight :ArrayList<ArrayList<Double>> = ArrayList<ArrayList<Double>>()
+//        val pointsLeft :ArrayList<ArrayList<Double>> = ArrayList<ArrayList<Double>>()
 //        val temp : ArrayList<Double> = ArrayList<Double>()
 //        temp.add(125.0)
 //        temp.add(20.0)
@@ -87,8 +87,8 @@ class ResultDisplay : AppCompatActivity() {
 //        temp.add(40.0)
 //        pointsLeft.add(temp)
 //        temp.clear()
-//        val pointsRight: ArrayList<ArrayList<Double>> = intent.getSerializableExtra("pointsRight") as ArrayList<ArrayList<Double>>
-//        val pointsLeft: ArrayList<ArrayList<Double>> = intent.getSerializableExtra("pointsLeft") as ArrayList<ArrayList<Double>>
+        val pointsRight: ArrayList<ArrayList<Double>> = intent.getSerializableExtra("pointsRight") as ArrayList<ArrayList<Double>>
+        val pointsLeft: ArrayList<ArrayList<Double>> = intent.getSerializableExtra("pointsLeft") as ArrayList<ArrayList<Double>>
         val linelistRight: ArrayList<Entry> = ArrayList()
         val linelistLeft: ArrayList<Entry> = ArrayList()
         for(i in pointsRight)
@@ -124,7 +124,7 @@ class ResultDisplay : AppCompatActivity() {
         lineDataset[1].valueTextSize=15f
 
         val xAxis:XAxis=binding.graph.xAxis
-        val frequencies : FloatArray = floatArrayOf(125.0f, 250.0f, 500.0f, 1000.0f, 2000.0f, 4000.0f, 8000.0f)
+//        val frequencies : FloatArray = floatArrayOf(125.0f, 250.0f, 500.0f, 1000.0f, 2000.0f, 4000.0f, 8000.0f)
 
         xAxis.setValueFormatter(MyXAxisFormatter())
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
@@ -133,7 +133,7 @@ class ResultDisplay : AppCompatActivity() {
         xAxis.setDrawAxisLine(true)
         xAxis.setGranularity(0f)
         xAxis.setCenterAxisLabels(true)
-        xAxis.mCenteredEntries=frequencies
+//        xAxis.mCenteredEntries=frequencies
 
         lineDataset[0].valueFormatter=PointValueFormatter()
         lineDataset[1].valueFormatter=PointValueFormatter()
@@ -147,9 +147,10 @@ class ResultDisplay : AppCompatActivity() {
     }
 
     class MyXAxisFormatter : IndexAxisValueFormatter() {
-        private val frequencies = arrayListOf(125.0, 250.0, 500.0, 1000.0, 2000.0, 4000.0, 8000.0)
+        private val frequencies : FloatArray = floatArrayOf(125.0f, 250.0f, 500.0f, 1000.0f, 2000.0f, 4000.0f, 8000.0f)
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
             axis!!.setLabelCount(10,true)
+            axis.mCenteredEntries=frequencies
             return (frequencies.getOrNull(value.toInt()) ?: (value.toString() + "Hz")).toString()
         }
     }
