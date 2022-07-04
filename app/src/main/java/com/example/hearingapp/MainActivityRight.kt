@@ -42,8 +42,8 @@ class MainActivityRight : AppCompatActivity() {
         setContentView(binding.root)
 
         var minfreq: Double = end
-        val frequencies = arrayListOf(125.0, 250.0, 500.0, 1000.0, 2000.0, 4000.0, 8000.0)
-        val dbs = arrayListOf(10, 20, 40, 60, 80, 100)
+        val frequencies = arrayListOf(125.0,  500.0,  2000.0, 8000.0)
+        val dbs = arrayListOf(10, 20, 40, 60, 80)
         var freqi: Int = 0
         var dbi: Int = 0
         val thread: Thread = Thread(Runnable() {

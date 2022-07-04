@@ -1,5 +1,6 @@
 package com.example.hearingapp
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import kotlin.collections.ArrayList
 
 class ResultDisplay : AppCompatActivity() {
     private lateinit var binding: ActivityResultDisplayBinding
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityResultDisplayBinding.inflate(layoutInflater)
@@ -29,24 +31,30 @@ class ResultDisplay : AppCompatActivity() {
 
         val pointsRight: ArrayList<ArrayList<Double>> = intent.getSerializableExtra("pointsRight") as ArrayList<ArrayList<Double>>
         val pointsLeft: ArrayList<ArrayList<Double>> = intent.getSerializableExtra("pointsLeft") as ArrayList<ArrayList<Double>>
+        var rightavg=0
+        var leftavg=0
         val linelistRight: ArrayList<Entry> = ArrayList()
         val linelistLeft: ArrayList<Entry> = ArrayList()
         for(i in pointsRight)
         {
             val x=i[0].toFloat()
             val y=i[1].toFloat()
+            rightavg = (rightavg+y).toInt()
             Log.i("points",x.toString())
             Log.i("points",y.toString())
             linelistRight.add(Entry(x,y))
         }
+        rightavg /= pointsRight.size
         for(i in pointsLeft)
         {
             val x=i[0].toFloat()
             val y=i[1].toFloat()
+            leftavg= (leftavg+y).toInt()
             Log.i("points",x.toString())
             Log.i("points",y.toString())
             linelistLeft.add(Entry(x,y))
         }
+        leftavg/=pointsLeft.size
 
         val lineDatasetRight=LineDataSet(linelistRight,"Right Ear")
         val lineDatasetLeft=LineDataSet(linelistLeft,"Left Ear")
@@ -64,8 +72,6 @@ class ResultDisplay : AppCompatActivity() {
         lineDataset[1].valueTextSize=15f
 
         val xAxis:XAxis=binding.graph.xAxis
-//        val frequencies : FloatArray = floatArrayOf(125.0f, 250.0f, 500.0f, 1000.0f, 2000.0f, 4000.0f, 8000.0f)
-
         xAxis.setValueFormatter(MyXAxisFormatter())
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
         xAxis.setTextSize(7f)
@@ -73,11 +79,29 @@ class ResultDisplay : AppCompatActivity() {
         xAxis.setDrawAxisLine(true)
         xAxis.setGranularity(0f)
         xAxis.setCenterAxisLabels(true)
-//        xAxis.mCenteredEntries=frequencies
 
         lineDataset[0].valueFormatter=PointValueFormatter()
         lineDataset[1].valueFormatter=PointValueFormatter()
 
+        //Printing Result
+        if(leftavg>40)
+        {
+            binding.leftResult.text="For Left Ear We Recommend You to visit ENT specialist"
+            binding.leftResult.setTextColor(Color.RED)
+        }
+        else {
+            binding.leftResult.setTextColor(Color.GREEN)
+            binding.leftResult.text = "Left Hearing is Normal"
+        }
+        if(rightavg>40)
+        {
+            binding.rightResult.setTextColor(Color.RED)
+            binding.rightResult.text="For Right Ear We Recommend You to visit ENT specialist"
+        }
+        else {
+            binding.rightResult.setTextColor(Color.GREEN)
+            binding.rightResult.text = "Right Hearing is Normal"
+        }
     }
 
     class PointValueFormatter: ValueFormatter() {
@@ -87,9 +111,9 @@ class ResultDisplay : AppCompatActivity() {
     }
 
     class MyXAxisFormatter : IndexAxisValueFormatter() {
-        private val frequencies : FloatArray = floatArrayOf(125.0f, 250.0f, 500.0f, 1000.0f, 2000.0f, 4000.0f, 8000.0f)
+        private val frequencies : FloatArray = floatArrayOf(125.0f, 500.0f, 2000.0f, 8000.0f)
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-            axis!!.setLabelCount(7,true)
+            axis!!.setLabelCount(4,true)
             axis.mCenteredEntries=frequencies
             return (frequencies.getOrNull(value.toInt()) ?: (value.toString() + "Hz")).toString()
         }
