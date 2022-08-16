@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="instruction">1. Puretone audiometry is the subjective test , kindly confirm the diagnosis after consultation with Otorhinolaryngologist.\n2. You are requested to press the button for tone of particular intensity and frequency.\n3. At the end of the session, estimated hearing loss will be depicted.\n4. We request you all to take care of very important sense of hearing.\n 5. Their should be no background noise\n\n6. We recommend you to use a standard \n     headphone while perfoming the test\n</string>
+
 </resources>

@@ -24,18 +24,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="1. Their should be no background noise\n\n2. We recommend you to use a standard \n     headphone while perfoming the test\n"
-        android:textSize="20sp"
-        android:textColor="@color/teal_200"
-        android:textStyle="bold|italic"
         android:fontFamily="sans-serif-medium"
+        android:padding="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="1. Puretone audiometry is the subjective test , kindly confirm the diagnosis after consultation with Otorhinolaryngologist.\n2. You are requested to press the button for tone of particular intensity and frequency.\n3. At the end of the session, estimated hearing loss will be depicted.\n4. We request you all to take care of very important sense of hearing.\n 5. Their should be no background noise\n6. We recommend you to use a standard \n     headphone while perfoming the test\n"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <Button
         android:id="@+id/btnFinish"
