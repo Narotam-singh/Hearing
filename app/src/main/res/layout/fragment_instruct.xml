@@ -7,14 +7,15 @@
     tools:context=".fragments.InstructFragment">
 
     <TextView
+        android:id="@+id/instruct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="Instructions"
+        android:textAllCaps="true"
         android:textColor="@color/teal_700"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textAllCaps="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,37 +23,36 @@
         app:layout_constraintVertical_bias="0.136" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="sans-serif-medium"
         android:padding="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="1. Puretone audiometry is the subjective test , kindly confirm the diagnosis after consultation with Otorhinolaryngologist.\n2. You are requested to press the button for tone of particular intensity and frequency.\n3. At the end of the session, estimated hearing loss will be depicted.\n4. We request you all to take care of very important sense of hearing.\n 5. Their should be no background noise\n6. We recommend you to use a standard \n     headphone while perfoming the test\n"
+        android:text="1. Puretone audiometry is the subjective test , kindly confirm the diagnosis after consultation with Otorhinolaryngologist.\n\n2. You are requested to press the button for tone of particular intensity and frequency.\n\n3. At the end of the session, estimated hearing loss will be depicted.\n\n4. We request you all to take care of very important sense of hearing.\n\n5. Their should be no background noise\n\n6. We recommend you to use a standard headphones while perfoming the test\n"
         android:textColor="@color/teal_200"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintTop_toBottomOf="@id/instruct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+         />
 
     <Button
         android:id="@+id/btnFinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="25dp"
         android:backgroundTint="@color/white"
-        android:text="Finish>"
+        android:text="Start>"
         android:textColor="@color/teal_700"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintVertical_bias="0.448" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@
         app:layout_constraintVertical_bias="0.144" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@drawable/hearing"
@@ -35,16 +36,13 @@
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/white"
         android:text="Next>"
         android:textColor="@color/teal_700"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
