@@ -86,21 +86,25 @@ class ResultDisplay : AppCompatActivity() {
         //Printing Result
         if(leftavg>40)
         {
-            binding.leftResult.text="For Left Ear We Recommend You to visit ENT specialist"
-            binding.leftResult.setTextColor(Color.RED)
+            binding.leftResult.text="For Left Ear \nWe Recommend You to \nvisit ENT specialist"
+//            binding.leftResult.setTextColor(Color.RED)
+            binding.cardLeftResult.setBackgroundColor(Color.RED)
         }
         else {
-            binding.leftResult.setTextColor(Color.GREEN)
-            binding.leftResult.text = "Left Hearing is Normal"
+//            binding.leftResult.setTextColor(Color.GREEN)
+            binding.cardLeftResult.setBackgroundColor(Color.GREEN)
+            binding.leftResult.text = "Left Hearing \nis Normal"
         }
         if(rightavg>40)
         {
-            binding.rightResult.setTextColor(Color.RED)
-            binding.rightResult.text="For Right Ear We Recommend You to visit ENT specialist"
+//            binding.rightResult.setTextColor(Color.RED)
+            binding.cardRightResult.setBackgroundColor(Color.RED)
+            binding.rightResult.text="For Right Ear \nWe Recommend You to \nvisit ENT specialist"
         }
         else {
-            binding.rightResult.setTextColor(Color.GREEN)
-            binding.rightResult.text = "Right Hearing is Normal"
+            binding.cardRightResult.setBackgroundColor(Color.GREEN)
+//            binding.rightResult.setTextColor(Color.GREEN)
+            binding.rightResult.text = "Right Hearing \nis Normal"
         }
     }
 

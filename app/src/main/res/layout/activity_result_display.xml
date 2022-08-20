@@ -24,35 +24,60 @@
 
         </com.github.mikephil.charting.charts.LineChart>
 
-        <TextView
-            android:id="@+id/leftResult"
-            android:layout_width="150dp"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLeftResult"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:elevation="10dp"
-            android:padding="16dp"
-            android:text="Fetching Result"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/rightResult"
+            app:layout_constraintEnd_toStartOf="@+id/cardRightResult"
             app:layout_constraintHorizontal_bias="0.21"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/graph" />
+            app:layout_constraintTop_toBottomOf="@+id/graph"
+            app:cardCornerRadius="10dp"
+            >
 
-        <TextView
-            android:id="@+id/rightResult"
-            android:layout_width="150dp"
+            <TextView
+                android:id="@+id/leftResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:text="Fetching Result"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                 />
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRightResult"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="16dp"
-            android:elevation="10dp"
-            android:padding="16dp"
-            android:text="Fetching Result"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/leftResult"
-            app:layout_constraintTop_toBottomOf="@+id/graph" />
+            app:layout_constraintLeft_toRightOf="@+id/cardLeftResult"
+            app:layout_constraintTop_toBottomOf="@+id/graph"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/rightResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:elevation="10dp"
+                android:textColor="@color/white"
+                android:padding="16dp"
+                android:text="Fetching Result"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                 />
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rightResult" />
+            app:layout_constraintTop_toBottomOf="@+id/cardLeftResult" />
 
         <TextView
             android:id="@+id/textView"
@@ -87,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/leftResult" />
+            app:layout_constraintTop_toBottomOf="@+id/cardLeftResult" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

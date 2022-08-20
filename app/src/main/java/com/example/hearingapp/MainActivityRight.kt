@@ -64,7 +64,7 @@ class MainActivityRight : AppCompatActivity() {
                         if(freqi<frequencies.size){
                         handler.post(Runnable() {
                             binding.tvFreq.text =
-                                "Playing sound of freq = " + frequencies[freqi].toString() + "\n  dB = " + dbs[dbi].toString()
+                                "Playing sound of freq = " + frequencies[freqi].toString() + "\n                     dB = " + dbs[dbi].toString()
                             run() {
                                 genTone(frequencies[freqi], dbs[dbi])
                                 playSound()
@@ -82,7 +82,7 @@ class MainActivityRight : AppCompatActivity() {
                                 }
                                 binding.fabNo.setOnClickListener {
                                     ++dbi
-                                    if(dbi>=dbs.size){
+                                    if(dbi>=dbs.size-1){
                                         dbi=0
                                         mindb=dbs[dbs.size-1]
                                     }
