@@ -27,7 +27,7 @@
             android:exported="false"/>
         <activity
             android:name=".MainActivityLeft"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivityRight"
             android:exported="true">

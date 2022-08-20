@@ -5,19 +5,17 @@
       <map>
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_main_left.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_main_right.xml" value="0.19655797101449277" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_main_right.xml" value="0.264" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_on_boarding.xml" value="0.1816123188405797" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_result_dispaly.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/activity_result_display.xml" value="0.264" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/fragment_instruct.xml" value="0.264" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/HearingApp/app/src/main/res/layout/fragment_welcome.xml" value="0.264" />
-        <entry key="..\:/Users/Prasant Poonia/AndroidStudioProjects/Hearing/app/src/main/res/layout/activity_main_left.xml" value="0.264" />
-        <entry key="..\:/Users/Prasant Poonia/AndroidStudioProjects/Hearing/app/src/main/res/layout/activity_main_right.xml" value="0.2" />
         <entry key="..\:/Users/Prasant Poonia/AndroidStudioProjects/Hearing/app/src/main/res/layout/activity_result_display.xml" value="0.25" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

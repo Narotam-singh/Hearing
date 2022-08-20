@@ -21,8 +21,6 @@ import com.example.hearingapp.databinding.ActivityMainLeftBinding
 import com.example.hearingapp.databinding.ActivityMainRightBinding
 import kotlin.math.min
 
-//TODO modify the code to check if the user didn't heard any dB
-//TODO left and right ear
 class MainActivityLeft : AppCompatActivity() {
     private lateinit var binding: ActivityMainLeftBinding
     val duration: Int = 6 // seconds
@@ -41,6 +39,8 @@ class MainActivityLeft : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainLeftBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         var minfreq: Double = end
         val frequencies = arrayListOf(125.0, 500.0, 1000.0 , 2000.0, 8000.0)
         val dbs = arrayListOf(10, 20, 40, 60, 80,100)
@@ -65,7 +65,7 @@ class MainActivityLeft : AppCompatActivity() {
                         if(freqi<frequencies.size){
                         handler.post(Runnable() {
                             binding.tvFreq.text =
-                                "Playing sound of freq = " + frequencies[freqi].toString() + "\n  dB = " + dbs[dbi].toString()
+                                "Playing sound of freq = " + frequencies[freqi].toString() + "\n                     dB = " + dbs[dbi].toString()
                             binding.Gif.visibility= View.VISIBLE
                             run() {
                                 genTone(frequencies[freqi], dbs[dbi])
@@ -85,7 +85,7 @@ class MainActivityLeft : AppCompatActivity() {
                                 }
                                 binding.fabNo.setOnClickListener {
                                     ++dbi
-                                    if(dbi>=dbs.size){
+                                    if(dbi>=dbs.size-1){
                                         dbi=0
                                         mindb=dbs[dbs.size-1]
                                     }

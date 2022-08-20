@@ -7,7 +7,7 @@
     tools:context=".MainActivityRight">
 
     <TextView
-        android:id="@+id/titleRight"
+        android:id="@+id/titleLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Playing For Right Ear"
@@ -37,11 +37,11 @@
         android:layout_width="200dp"
         android:layout_height="120dp"
         android:layout_marginTop="200dp"
-        android:src="@drawable/soundgif"
+        android:src="@drawable/soundanimation"
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleRight" />
+        app:layout_constraintTop_toBottomOf="@id/titleLeft" />
 
     <FrameLayout
         android:id="@+id/flYes"

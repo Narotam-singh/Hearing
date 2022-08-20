@@ -20,8 +20,6 @@ import androidx.core.content.ContextCompat.startActivity
 import com.example.hearingapp.databinding.ActivityMainRightBinding
 import kotlin.math.min
 
-//TODO modify the code to check if the user didn't heard any dB
-//TODO left and right ear
 class MainActivityRight : AppCompatActivity() {
     private lateinit var binding: ActivityMainRightBinding
     val duration: Int = 6 // seconds
