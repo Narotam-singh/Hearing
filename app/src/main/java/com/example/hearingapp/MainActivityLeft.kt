@@ -13,6 +13,7 @@ import android.os.Handler
 import android.os.Parcelable
 import android.util.ArrayMap
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
@@ -40,8 +41,6 @@ class MainActivityLeft : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainLeftBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         var minfreq: Double = end
         val frequencies = arrayListOf(125.0, 500.0, 1000.0 , 2000.0, 8000.0)
         val dbs = arrayListOf(10, 20, 40, 60, 80,100)
@@ -66,7 +65,8 @@ class MainActivityLeft : AppCompatActivity() {
                         if(freqi<frequencies.size){
                         handler.post(Runnable() {
                             binding.tvFreq.text =
-                                "Playing sound of freq = " + frequencies[freqi].toString() + "\n                     dB = " + dbs[dbi].toString()
+                                "Playing sound of freq = " + frequencies[freqi].toString() + "\n  dB = " + dbs[dbi].toString()
+                            binding.Gif.visibility= View.VISIBLE
                             run() {
                                 genTone(frequencies[freqi], dbs[dbi])
                                 playSound()
@@ -75,6 +75,7 @@ class MainActivityLeft : AppCompatActivity() {
                                 binding.fabYes.isClickable = true
                                 binding.fabNo.isClickable = true
                                 binding.tvFreq.text = "Did you hear that?\n  Press Yes or No"
+                                binding.Gif.visibility=View.GONE
                                 binding.fabYes.setOnClickListener {
                                     if (dbi < dbs.size)
                                         mindb = dbs[dbi]

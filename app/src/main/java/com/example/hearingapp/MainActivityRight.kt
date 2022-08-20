@@ -13,6 +13,7 @@ import android.os.Handler
 import android.os.Parcelable
 import android.util.ArrayMap
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
@@ -65,6 +66,7 @@ class MainActivityRight : AppCompatActivity() {
                         handler.post(Runnable() {
                             binding.tvFreq.text =
                                 "Playing sound of freq = " + frequencies[freqi].toString() + "\n                     dB = " + dbs[dbi].toString()
+                            binding.Gif.visibility= View.VISIBLE
                             run() {
                                 genTone(frequencies[freqi], dbs[dbi])
                                 playSound()
@@ -73,6 +75,7 @@ class MainActivityRight : AppCompatActivity() {
                                 binding.fabYes.isClickable = true
                                 binding.fabNo.isClickable = true
                                 binding.tvFreq.text = "Did you hear that?\n  Press Yes or No"
+                                binding.Gif.visibility=View.GONE
                                 binding.fabYes.setOnClickListener {
                                     if (dbi < dbs.size)
                                         mindb = dbs[dbi]
