@@ -65,8 +65,8 @@ class MainActivityRight : AppCompatActivity() {
                             binding.tvFreq.text =
                                 "Playing sound of freq = " + frequencies[freqi].toString() + "\n                     dB = " + dbs[dbi].toString()
                             binding.Gif.visibility= View.VISIBLE
-                            binding.fabYes.visibility = View.GONE
-                            binding.fabNo.visibility = View.GONE
+                            binding.flYes.visibility=View.GONE
+                            binding.flNo.visibility=View.GONE
                             run() {
                                 genTone(frequencies[freqi], dbs[dbi])
                                 playSound()
@@ -74,8 +74,8 @@ class MainActivityRight : AppCompatActivity() {
                             Handler().postDelayed({
                                 binding.fabYes.isClickable = true
                                 binding.fabNo.isClickable = true
-                                binding.fabYes.visibility = View.VISIBLE
-                                binding.fabNo.visibility = View.VISIBLE
+                                binding.flNo.visibility = View.VISIBLE
+                                binding.flYes.visibility = View.VISIBLE
                                 binding.tvFreq.text = "Did you hear that?\n  Press Yes or No"
                                 binding.Gif.visibility=View.GONE
                                 binding.fabYes.setOnClickListener {

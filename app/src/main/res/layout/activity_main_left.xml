@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:elevation="16dp"
+            android:id="@+id/yesText"
             android:text="YES"
             android:textColor="@color/white"
             android:textSize="30sp" />
@@ -104,6 +105,7 @@
             android:layout_gravity="center"
             android:elevation="16dp"
             android:text="NO"
+            android:id="@+id/noText"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
